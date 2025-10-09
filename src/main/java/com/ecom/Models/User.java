@@ -1,5 +1,6 @@
 package com.ecom.Models;
 
+import com.ecom.enums.UserRole;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,4 +23,7 @@ public class User {
     Long id;
     String firstName;
     String lastName;
+    String email;
+    String phone;
+    UserRole role = UserRole.CUSTOMER;
 }
