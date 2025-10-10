@@ -1,13 +1,13 @@
 package com.ecom.Models;
 
 import com.ecom.enums.UserRole;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -26,4 +26,14 @@ public class User {
     String email;
     String phone;
     UserRole role = UserRole.CUSTOMER;
+
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    Address address;
+
+    @CreationTimestamp
+    LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    LocalDateTime updatedAt;
 }
