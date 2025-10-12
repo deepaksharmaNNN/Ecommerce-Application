@@ -1,11 +1,13 @@
 package com.ecom.service;
 
 import com.ecom.Models.User;
+import com.ecom.dto.UserRequest;
+import com.ecom.dto.UserResponse;
+import com.ecom.mapper.UserMapper;
 import com.ecom.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,25 +16,41 @@ import java.util.Optional;
 public class UserService {
 
     private  final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public List<User> getAllUser(){
-        return userRepository.findAll();
+    public List<UserResponse> getAllUser(){
+        return userRepository.findAll().stream()
+                .map(userMapper::mapToUserResponse)
+                .toList();
     }
 
-    public List<User> createUser(User user) {
-        return userRepository.saveAll(List.of(user));
+    public String createUser(UserRequest userRequest) {
+        return userRepository.save(userMapper.mapToUser(userRequest)).getFirstName() + " created!";
     }
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
-
-    }
-    public User updateUser(Long id, User updatedUser) {
+    public Optional<UserResponse> getUserById(Long id) {
         return userRepository.findById(id)
-                .map(user -> {
-                    user.setFirstName(updatedUser.getFirstName());
-                    user.setLastName(updatedUser.getLastName());
-                    return userRepository.save(user);
-                })
-                .orElse(null);
+                .map(userMapper::mapToUserResponse);
+
+    }
+    public Boolean updateUser(Long id, UserRequest updatedUserRequest) {
+        return  userRepository.findById(id).map(existingUser -> {
+            existingUser.setFirstName(updatedUserRequest.getFirstName());
+            existingUser.setLastName(updatedUserRequest.getLastName());
+            existingUser.setEmail(updatedUserRequest.getEmail());
+            existingUser.setPhone(updatedUserRequest.getPhone());
+            if (updatedUserRequest.getAddress() != null) {
+                if (existingUser.getAddress() == null) {
+                    existingUser.setAddress(userMapper.mapToUser(updatedUserRequest).getAddress());
+                } else {
+                    existingUser.getAddress().setStreet(updatedUserRequest.getAddress().getStreet());
+                    existingUser.getAddress().setCity(updatedUserRequest.getAddress().getCity());
+                    existingUser.getAddress().setState(updatedUserRequest.getAddress().getState());
+                    existingUser.getAddress().setCountry(updatedUserRequest.getAddress().getCountry());
+                    existingUser.getAddress().setZipCode(updatedUserRequest.getAddress().getZipCode());
+                }
+            }
+            userRepository.save(existingUser);
+            return true;
+        }).orElse(false);
     }
 }

@@ -8,9 +8,9 @@ import lombok.experimental.FieldDefaults;
 @Table
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Address {
     @Id
