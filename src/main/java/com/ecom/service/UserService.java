@@ -1,6 +1,5 @@
 package com.ecom.service;
 
-import com.ecom.Models.User;
 import com.ecom.dto.UserRequest;
 import com.ecom.dto.UserResponse;
 import com.ecom.mapper.UserMapper;

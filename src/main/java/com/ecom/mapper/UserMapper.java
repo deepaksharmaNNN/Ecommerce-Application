@@ -1,7 +1,7 @@
 package com.ecom.mapper;
 
-import com.ecom.Models.Address;
-import com.ecom.Models.User;
+import com.ecom.model.Address;
+import com.ecom.model.User;
 import com.ecom.dto.AddressResponse;
 import com.ecom.dto.UserRequest;
 import com.ecom.dto.UserResponse;
