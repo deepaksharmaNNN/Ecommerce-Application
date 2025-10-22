@@ -17,6 +17,17 @@ public class ProductMapper {
                 .imageUrl(productRequest.getImageUrl())
                 .build();
     }
+    public Product mapToProductWithId(Long id, ProductRequest productRequest){
+        return Product.builder()
+                .id(id)
+                .name(productRequest.getName())
+                .description(productRequest.getDescription())
+                .price(productRequest.getPrice())
+                .stockQuantity(productRequest.getStockQuantity())
+                .category(productRequest.getCategory())
+                .imageUrl(productRequest.getImageUrl())
+                .build();
+    }
     public ProductResponse mapToProductResponse(Product product){
         return ProductResponse.builder()
                 .id(product.getId())
@@ -26,7 +37,7 @@ public class ProductMapper {
                 .stockQuantity(product.getStockQuantity())
                 .productCategory(product.getCategory())
                 .imageUrl(product.getImageUrl())
-                .isActive(product.getIsActive())
+                .isActive(Boolean.TRUE)
                 .build();
     }
 }

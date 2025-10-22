@@ -26,9 +26,10 @@ public class Product {
     String description;
     BigDecimal price;
     Integer stockQuantity;
+    @Enumerated(EnumType.STRING)
     ProductCategory category;
     String imageUrl;
-    Boolean isActive = true;
+    Boolean isActive = Boolean.TRUE;
     @CreationTimestamp
     LocalDateTime createdAt;
     @UpdateTimestamp
