@@ -15,6 +15,7 @@ public class ProductMapper {
                 .stockQuantity(productRequest.getStockQuantity())
                 .category(productRequest.getCategory())
                 .imageUrl(productRequest.getImageUrl())
+                .isActive(Boolean.TRUE)
                 .build();
     }
     public Product mapToProductWithId(Long id, ProductRequest productRequest){
@@ -26,6 +27,7 @@ public class ProductMapper {
                 .stockQuantity(productRequest.getStockQuantity())
                 .category(productRequest.getCategory())
                 .imageUrl(productRequest.getImageUrl())
+                .isActive(Boolean.TRUE)
                 .build();
     }
     public ProductResponse mapToProductResponse(Product product){

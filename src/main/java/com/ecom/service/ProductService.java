@@ -36,4 +36,13 @@ public class ProductService {
                 .map(productMapper::mapToProductResponse)
                 .collect(Collectors.toList());
     }
+
+    // Soft delete implementation with Exception handling
+    public Boolean deleteProduct(Long id) {
+        return productRepository.findById(id).map(product -> {
+            product.setIsActive(Boolean.FALSE);
+            productRepository.save(product);
+            return Boolean.TRUE;
+        }).orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+    }
 }
