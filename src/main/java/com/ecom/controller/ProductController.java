@@ -34,9 +34,4 @@ public class ProductController {
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/product/{id}") // http://localhost:8080/api/products/product/1
-    public ResponseEntity<Boolean> deleteProduct(@PathVariable Long id) {
-        return new ResponseEntity<>(productService.deleteProduct(id), HttpStatus.OK);
-    }
-
 }
