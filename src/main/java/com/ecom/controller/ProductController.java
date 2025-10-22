@@ -34,4 +34,14 @@ public class ProductController {
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 
+    @DeleteMapping("/product/{id}") // http://localhost:8080/api/products/product/1
+    public ResponseEntity<Boolean> deleteProduct(@PathVariable Long id) {
+        return new ResponseEntity<>(productService.deleteProduct(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/search") // http://localhost:8080/api/products/search
+    public ResponseEntity<List<ProductResponse>> searchProducts(@RequestParam String keyword) {
+        return new ResponseEntity<>(productService.searchProducts(keyword), HttpStatus.OK);
+    }
+
 }

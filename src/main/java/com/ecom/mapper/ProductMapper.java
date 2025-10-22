@@ -14,6 +14,7 @@ public class ProductMapper {
                 .price(productRequest.getPrice())
                 .stockQuantity(productRequest.getStockQuantity())
                 .category(productRequest.getCategory())
+                .isActive(Boolean.TRUE)
                 .imageUrl(productRequest.getImageUrl())
                 .build();
     }
@@ -25,6 +26,7 @@ public class ProductMapper {
                 .price(productRequest.getPrice())
                 .stockQuantity(productRequest.getStockQuantity())
                 .category(productRequest.getCategory())
+                .isActive(Boolean.TRUE)
                 .imageUrl(productRequest.getImageUrl())
                 .build();
     }

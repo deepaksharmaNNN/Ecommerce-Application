@@ -36,4 +36,19 @@ public class ProductService {
                 .map(productMapper::mapToProductResponse)
                 .collect(Collectors.toList());
     }
+
+    public Boolean deleteProduct(Long id) {
+        return productRepository.findById(id).map(product -> {
+            product.setIsActive(Boolean.FALSE);
+            productRepository.save(product);
+            return Boolean.TRUE;
+        }).orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+    }
+
+    public List<ProductResponse> searchProducts(String keyword) {
+        return productRepository.searchProducts(keyword).stream()
+                .map(productMapper::mapToProductResponse)
+                .collect(Collectors.toList());
+
+    }
 }
