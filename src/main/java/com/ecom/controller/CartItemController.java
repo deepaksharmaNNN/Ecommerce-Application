@@ -24,4 +24,10 @@ public class CartItemController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to add item to cart");
         }
     }
+    @DeleteMapping("/remove/{productId}") // http://localhost:8080/api/cart-items/remove/{productId}
+    public ResponseEntity<String> removeItemFromCart(@RequestHeader("X-User-Id") Long userId, @PathVariable Long productId) {
+        Boolean result = cartItemService.deleteItemFromCart(userId, productId);
+        return result ? ResponseEntity.status(HttpStatus.OK).body("Item removed successfully")
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to remove item from cart");
+    }
 }
