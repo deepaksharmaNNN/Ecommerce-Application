@@ -3,6 +3,7 @@ package com.ecom.service;
 import com.ecom.dto.UserRequest;
 import com.ecom.dto.UserResponse;
 import com.ecom.mapper.UserMapper;
+import com.ecom.model.User;
 import com.ecom.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,9 @@ public class UserService {
             userRepository.save(existingUser);
             return true;
         }).orElse(false);
+    }
+    // Additional method only for internal service use by other services
+    public Optional<User> getUserByIdInternal(Long id) {
+        return userRepository.findById(id);
     }
 }

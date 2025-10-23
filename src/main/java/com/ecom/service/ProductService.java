@@ -3,6 +3,7 @@ package com.ecom.service;
 import com.ecom.dto.ProductRequest;
 import com.ecom.dto.ProductResponse;
 import com.ecom.mapper.ProductMapper;
+import com.ecom.model.Product;
 import com.ecom.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,9 @@ public class ProductService {
                 .map(productMapper::mapToProductResponse)
                 .collect(Collectors.toList());
 
+    }
+    // Additional method only for internal service use by other services
+    public Optional<Product> getProductByIdInternal(Long id) {
+        return productRepository.findById(id);
     }
 }
