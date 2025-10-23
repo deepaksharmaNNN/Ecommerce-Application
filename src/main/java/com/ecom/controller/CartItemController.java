@@ -1,11 +1,14 @@
 package com.ecom.controller;
 
 import com.ecom.dto.CartItemRequest;
+import com.ecom.model.CartItem;
 import com.ecom.service.CartItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,5 +32,10 @@ public class CartItemController {
         Boolean result = cartItemService.deleteItemFromCart(userId, productId);
         return result ? ResponseEntity.status(HttpStatus.OK).body("Item removed successfully")
                 : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to remove item from cart");
+    }
+
+    @GetMapping("/get") // http://localhost:8080/api/cart-items/get
+    public ResponseEntity<List<CartItem>> getCartItems(@RequestHeader("X-User-Id") Long userId){
+        return new ResponseEntity<>(cartItemService.getCartItemsByUserId(userId), HttpStatus.OK);
     }
 }
