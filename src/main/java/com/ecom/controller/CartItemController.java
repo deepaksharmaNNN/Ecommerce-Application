@@ -15,7 +15,7 @@ public class CartItemController {
     private  final CartItemService cartItemService;
 
 
-    @PostMapping("/add")
+    @PostMapping("/add") // http://localhost:8080/api/cart-items/add
     public ResponseEntity<String> addItemToCart(@RequestHeader("X-User-Id") Long userId, @RequestBody CartItemRequest cartItemRequest) {
         Boolean isAdded = cartItemService.addItemToCart(userId, cartItemRequest);
         if (isAdded) {
