@@ -65,4 +65,10 @@ public class CartItemService {
         if (userOpt.isEmpty()) return List.of();
         return cartItemRepository.findByUser(userOpt.get());
     }
+
+    public void clearCartByUserId(Long userId) {
+        Optional<User> userOpt = userService.getUserByIdInternal(userId);
+        if (userOpt.isEmpty()) return;
+        cartItemRepository.deleteByUser(userOpt.get());
+    }
 }
